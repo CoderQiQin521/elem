@@ -18,14 +18,14 @@
         </router-link>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :seller="seller"></router-view>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import header from './components/header/header';
   const ERR_OK = 0;
-  
+
   export default {
   	data() {
   		return {
@@ -40,7 +40,6 @@
     		response = response.body;
     		if (response.errno === ERR_OK) {
     			this.seller = response.data;
-    			console.log(this.seller);
     		}
     	});
     }
