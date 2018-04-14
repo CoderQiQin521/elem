@@ -23,6 +23,17 @@
 				</div>
 			</div>
 		</div>
+		<div class="ball-container">
+			<div v-for="ball in balls" v-show="ball.show">
+				<transition name="drop" @before-enter="">
+					<div class="ball" v-show="ball.show">
+						<div class="inner">
+							
+						</div>
+					</div>
+				</transition>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -43,6 +54,22 @@
 				type: Number,
 				default: 0
 			}
+		},
+		data() {
+			return {
+				balls: [{
+					show: false
+				}, {
+					show: false
+				}, {
+					show: false
+				}, {
+					show: false
+				}, {
+					show: false
+				}],
+				dropBalls: []
+			};
 		},
 		computed: {
 			totalPrice() {
@@ -75,6 +102,33 @@
 				} else {
 					return 'enough';
 				}
+			}
+		},
+		methods: {
+			drop(el) {
+				console.log(el);
+				for (let i = 0; i < this.balls.length; i++) {
+					let ball = this.balls[i];
+					if (!ball.show) {
+						ball.show = true;
+						ball.el = el;
+						this.dropBalls.push(ball);
+						return;
+					}
+				}
+			},
+			beforeDrop(el) {
+				let count = this.balls.length;
+				while (count--) {
+					let ball = this.balls[count];
+					if (ball.show) {
+						let a = 4;
+					}
+				}
+			},
+			dropping(el) {
+			},
+			afterDrop(el) {
 			}
 		}
 	};
@@ -167,4 +221,17 @@
 					&.enough
 						background: #00b43c
 						color: #fff
+			.ball-container
+				.ball
+					position: fixed
+					left: 32px
+					bottom: 22px
+					z-index: 200
+					transition: all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41)
+					.inner
+						width: 16px
+						height: 16px
+						border-radius: 50%
+						background-color: rgb(0, 160, 220)
+						transition: all 0.4s linear
 </style>
