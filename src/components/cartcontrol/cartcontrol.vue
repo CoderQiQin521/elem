@@ -20,6 +20,9 @@
 		},
 		methods: {
 			addCart(event) {
+				if (!event._constructed) {
+          			return;
+        		}
 				if (!this.food.count) {
 					Vue.set(this.food, 'count', 1);
 				} else {
@@ -28,6 +31,9 @@
 				this.$emit('add', event.target);
 			},
 			desreaseCart() {
+				if (!event._constructed) {
+          			return;
+        		}
 				if (this.food.count) {
 					this.food.count--;
 				}
