@@ -90,7 +90,7 @@
   		'seller'() {
   			this.$nextTick(() => {
   				this._initScroll();
-				this._initPics();
+					this._initPics();
   			});
   		}
   	},
